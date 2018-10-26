@@ -1,0 +1,15 @@
+---
+
+docker_ha_container_name: home-assistant
+docker_appdaemon_container_name: ha-triggers
+docker_tts_container_name: tts
+docker_nodered_container_name: nodered
+# docker_stt_container_name: stt
+
+automation_mounted_directory: "{{ data_mount_root }}/{{ automation_directory }}"
+
+home_assistant_git_repo: "{{ data_mount_root }}/{{ git_directory }}/ha-config.git"
+ha_triggers_git_repo: "{{ data_mount_root }}/{{ git_directory }}/ha-triggers.git"
+
+# stt_model_name: 'sample_english_nnet2.yaml'
+

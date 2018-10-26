@@ -1,0 +1,29 @@
+- name: Update home-assistant configuration'
+  git:
+    repo: '{{ home_assistant_git_repo }}'
+    dest: '{{ automation_mounted_directory }}/configs/{{ docker_ha_container_name}}'
+    version: development
+    force: yes
+
+- name: 'Start home-assistant docker container'
+  register: haStarted
+  docker_container:
+    name: "{{ docker_ha_container_name }}"
+    image: homeassistant/home-assistant:latest
+    network_mode: host
+    devices:
+      - '/dev/ttyACM0:/dev/ttyACM0'
+    volumes:
+      - '{{ automation_mounted_directory }}/configs/{{ docker_ha_container_name }}:/config'
+      - '/etc/localtime:/etc/localtime:ro'
+    state: 'started'
+    restart_policy: 'always'
+    log_driver: 'syslog'
+    log_options:
+      tag: "{{ docker_ha_container_name }}"
+
+- name: Install OpenCV
+  command: sudo docker exec -i home-assistant /bin/bash -c 'pip install opencv-python'
+  when: haStarted.changed
+  notify: Restart Home-Assistant
+

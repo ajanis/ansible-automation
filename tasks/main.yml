@@ -1,0 +1,10 @@
+---
+
+- name: Create Configs Directory
+  file:
+    name: '{{ automation_mounted_directory }}/configs'
+    state: directory
+
+- include: ha-triggers.yml
+#- include: home-assistant.yml
+- include: tts.yml

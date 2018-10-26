@@ -1,0 +1,11 @@
+---
+- name: Automation Configs
+  hosts: automation
+  become: True
+  vars:
+    server: False
+  tasks:
+    - import_role:
+        name: common    
+    - import_role:
+        name: automation

@@ -1,0 +1,30 @@
+#- name: 'Update ha-trigger configuration'
+#  git:
+#    repo: /nfs/git/ha-triggers.git
+#    dest: '{{ automation_mounted_directory }}/configs/{{ docker_appdaemon_container_name }}'
+#    version: master
+#    force: yes
+#
+- name: 'Make sure node-red config exists'
+  file:
+    path: '{{ automation_mounted_directory }}/configs/{{ docker_nodered_container_name }}'
+    state: directory
+    mode: 0777
+    owner: automation
+    group: automation
+
+- name: 'Start node-red docker container'
+  docker_container:
+    name: "{{ docker_nodered_container_name }}"
+    image: nodered/node-red-docker:latest
+    published_ports:
+      - '0.0.0.0:1880:1880'
+    volumes:
+      - '{{ automation_mounted_directory }}/configs/{{ docker_nodered_container_name }}:/data'
+      - '/etc/localtime:/etc/localtime:ro'
+    state: 'started'
+    restart_policy: 'always'
+    log_driver: 'syslog'
+    log_options:
+      tag: "{{ docker_nodered_container_name }}"
+
