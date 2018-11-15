@@ -6,5 +6,5 @@
     state: directory
 
 - include: ha-triggers.yml
-#- include: home-assistant.yml
+- include: home-assistant.yml
 - include: tts.yml
