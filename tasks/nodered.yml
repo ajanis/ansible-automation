@@ -3,6 +3,6 @@
   file:
     path: '{{ automation_mounted_directory }}/configs/{{ docker_nodered_container_name }}'
     state: directory
-    mode: 0777
+    mode: 0775
     owner: automation
     group: automation

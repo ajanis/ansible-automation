@@ -1,7 +1,8 @@
 ---
 - name: 'Update ha-trigger configuration'
   git:
-    repo: "{{ ha_triggers_git_repo }}"
+    repo: "file://{{ ha_triggers_git_repo }}"
     dest: '{{ automation_mounted_directory }}/configs/{{ docker_appdaemon_container_name }}'
     version: master
     force: yes
+  become_user: automation

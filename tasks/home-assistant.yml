@@ -1,12 +1,13 @@
 ---
 - name: Update home-assistant configuration
   git:
-    repo: '{{ home_assistant_git_repo }}'
+    repo: 'file://{{ home_assistant_git_repo }}'
     dest: '{{ automation_mounted_directory }}/configs/{{ docker_ha_container_name}}'
-    version: development
+    version: master
     force: yes
+  become_user: automation
 
-- name: Install OpenCV
-  command: sudo docker exec -i home-assistant /bin/bash -c 'pip install opencv-python'
-  when: haStarted.changed
-  notify: restart home-assistant
+# need to make this smarter so it runs after the docker tasks
+#- name: Install OpenCV
+#  command: sudo docker exec -i home-assistant /bin/bash -c 'pip install opencv-python'
+#  notify: restart home-assistant
