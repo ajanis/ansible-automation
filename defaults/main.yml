@@ -1,10 +1,9 @@
 ---
-
 docker_ha_container_name: home-assistant
 docker_appdaemon_container_name: ha-triggers
 docker_tts_container_name: tts
 docker_nodered_container_name: nodered
-# docker_stt_container_name: stt
+docker_stt_container_name: stt
 
 automation_mounted_directory: "{{ data_mount_root }}/{{ automation_directory }}"
 
