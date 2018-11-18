@@ -1,26 +1,7 @@
+---
 - name: 'Update ha-trigger configuration'
   git:
     repo: "{{ ha_triggers_git_repo }}"
     dest: '{{ automation_mounted_directory }}/configs/{{ docker_appdaemon_container_name }}'
     version: master
     force: yes
-
-- name: 'Start ha-trigger docker container'
-  docker_container:
-    name: "{{ docker_appdaemon_container_name }}"
-    image: acockburn/appdaemon:latest
-    published_ports:
-      - '0.0.0.0:5050:5050'
-    env:
-      PUID: '0'
-      PGID: '0'
-      VERSION: 'latest'
-    volumes:
-      - '{{ automation_mounted_directory }}/configs/{{ docker_appdaemon_container_name }}:/conf'
-      - '/etc/localtime:/etc/localtime:ro'
-    state: 'started'
-    restart_policy: 'always'
-    log_driver: 'syslog'
-    log_options:
-      tag: "{{ docker_appdaemon_container_name }}"
-
