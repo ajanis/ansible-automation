@@ -1,3 +1,4 @@
+---
 - name: Restart Home-Assistant
   docker_container:
     name: '{{ docker_ha_container_name }}'
