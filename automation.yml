@@ -2,10 +2,16 @@
 - name: Automation Configs
   hosts: automation
   become: True
-  vars:
-    server: False
   tasks:
     - import_role:
-        name: common    
+        name: common
     - import_role:
-        name: automation
+        name: openldap
+    - import_role:
+        name: ceph-fs
+      when: storage_backend == "cephfs"
+    - import_role:
+        name: nfs
+      when: storage_backend == "nfs"
+    - import_role:
+        name: docker
