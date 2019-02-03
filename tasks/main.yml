@@ -5,6 +5,6 @@
     name: '{{ automation_mounted_directory }}/configs'
     state: directory
 
-- include: ha-triggers.yml
-- include: home-assistant.yml
-#- include: tts.yml
+- include_tasks: ha-triggers.yml
+- include_tasks: home-assistant.yml
+#- include_tasks: tts.yml
