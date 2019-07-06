@@ -1,9 +1,11 @@
 ---
-- name: Restart Home-Assistant
-  docker_container:
-    name: '{{ docker_ha_container_name }}'
-    image: homeassistant/home-assistant:latest
+- name: restart home-assistant
+  systemd:
+    name: docker-home-assistant
     state: restarted
+    enabled: yes
+    daemon_reload: yes
+
 
 - name: Start STT
   command: 'docker exec {{ docker_stt_container_name }} /bin/bash -l -c "/opt/start.sh -y /opt/models/{{ stt_model_name }}"'
