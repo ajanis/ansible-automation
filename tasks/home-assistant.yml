@@ -1,4 +1,21 @@
 ---
+
+- name: Install SSL Key
+  copy:
+    content: "{{ vault_ssl_private_key }}"
+    dest: "{{ automation_mounted_directory }}/configs/{{ docker_ha_container_name}}/ssl/{{ www_domain }}.key"
+    owner: automation
+    group: automation
+    mode: 0600
+
+- name: Install SSL Certificate Chain
+  copy:
+    content: "{{ vault_ssl_certificate }}"
+    dest: "{{ automation_mounted_directory }}/configs/{{ docker_ha_container_name}}/ssl/{{ www_domain }}.crt"
+    owner: automation
+    group: automation
+    mode: 0600
+
 - name: Update home-assistant configuration'
   git:
     repo: '{{ home_assistant_git_repo }}'
