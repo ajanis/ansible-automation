@@ -7,6 +7,7 @@
     owner: automation
     group: automation
     mode: 0600
+  notify: restart home-assistant
 
 - name: Install SSL Certificate Chain
   copy:
@@ -15,19 +16,20 @@
     owner: automation
     group: automation
     mode: 0600
+  notify: restart home-assistant
 
-- name: Update home-assistant configuration'
-  git:
-    repo: '{{ home_assistant_git_repo }}'
-    dest: '{{ automation_mounted_directory }}/configs/{{ docker_ha_container_name}}'
-    version: development
-    force: yes
-  notify: Restart Home-Assistant
-
-- name: Install OpenCV
-  command: sudo docker exec -i home-assistant /bin/bash -c 'pip install opencv-python'
-  when: haStarted.changed
-  notify: Restart Home-Assistant
+#- name: Update home-assistant configuration'
+#  git:
+#    repo: '{{ home_assistant_git_repo }}'
+#    dest: '{{ automation_mounted_directory }}/configs/{{ docker_ha_container_name}}'
+#    version: development
+#    force: yes
+#  notify: Restart Home-Assistant
+#
+#- name: Install OpenCV
+#  command: sudo docker exec -i home-assistant /bin/bash -c 'pip install opencv-python'
+#  when: haStarted.changed
+#  notify: Restart Home-Assistant
 
 #- name: 'Start home-assistant docker container'
 #  register: haStarted
