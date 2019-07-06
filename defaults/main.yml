@@ -12,3 +12,8 @@ home_assistant_git_repo: "{{ data_mount_root }}/{{ git_directory }}/ha-config.gi
 ha_triggers_git_repo: "{{ data_mount_root }}/{{ git_directory }}/ha-triggers.git"
 
 stt_model_name: 'sample_english_nnet2.yaml'
+
+ssl_certpath:
+ssl_keypath:
+ssl_privkey:
+ssl_certchain:

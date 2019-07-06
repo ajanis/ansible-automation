@@ -2,8 +2,8 @@
 
 - name: Install SSL Key
   copy:
-    content: "{{ vault_ssl_private_key }}"
-    dest: "{{ automation_mounted_directory }}/configs/{{ docker_ha_container_name}}/ssl/{{ www_domain }}.key"
+    content: "{{ ssl_privkey }}"
+    dest: "{{ ssl_keypath }}"
     owner: automation
     group: automation
     mode: 0600
@@ -11,8 +11,8 @@
 
 - name: Install SSL Certificate Chain
   copy:
-    content: "{{ vault_ssl_certificate }}"
-    dest: "{{ automation_mounted_directory }}/configs/{{ docker_ha_container_name}}/ssl/{{ www_domain }}.crt"
+    content: "{{ ssl_certchain }}"
+    dest: "{{ ssl_certpath }}"
     owner: automation
     group: automation
     mode: 0600
